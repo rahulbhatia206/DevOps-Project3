@@ -39,8 +39,8 @@ commands:
     steps:
       - slack/status:
           failure_message: ':red_circle: \`$CIRCLE_JOB\` JOB is _*Failed*_!! \n Project: \`$CIRCLE_PROJECT_REPONAME\` Branch: \`$CIRCLE_BRANCH\` \n'
-          success_message: ':greenlight: \`$CIRCLE_JOB\` JOB is _*Succeeded*_!! \n Project: \`$CIRCLE_PROJECT_REPONAME\` Branch: \`$CIRCLE_BRANCH\` \n'
-            
+          fail_only: true
+
 jobs:
   build-frontend:
     docker:
