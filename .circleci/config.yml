@@ -82,15 +82,16 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [frontend-test]
       - run:
           name: Run Front-End Tests
           command: |
             cd frontend
+            npm install
             npm run test
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-build
+          key: frontend-test
       - notify-status-on-slack
 
   test-backend:
