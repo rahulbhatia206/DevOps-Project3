@@ -68,7 +68,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
+          name: Build Back-end
           command: |
             cd backend
             npm install
@@ -86,7 +86,7 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: Build front-end
+          name: Run Front-End Tests
           command: |
             cd frontend
             npm run test
@@ -103,7 +103,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
+          name: Run Back-End Tests
           command: |
             cd backend
             npm run test
@@ -120,7 +120,7 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: Build front-end
+          name: Scan Front-End Dependencies
           command: |
             cd frontend
             npm audit --audit-level=critical
@@ -137,7 +137,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
+          name: Scan Back-End Dependencies
           command: |
             cd backend
             npm audit --audit-level=critical
