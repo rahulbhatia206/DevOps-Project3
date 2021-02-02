@@ -100,15 +100,16 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [backend-test]
       - run:
           name: Run Back-End Tests
           command: |
             cd backend
+            npm install
             npm run test
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build
+          key: backend-test
       - notify-status-on-slack
 
   scan-frontend:
