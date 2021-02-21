@@ -94,6 +94,7 @@ jobs:
           name: Run Front-End Tests
           command: |
             cd frontend
+            npm install
             npm run test
       - save_cache:
           paths: [frontend/node_modules]
