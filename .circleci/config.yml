@@ -220,7 +220,7 @@ jobs:
       - checkout
       - run: yum install -y tar
       - run: yum install -y gzip
-      - run: yum install -y apk
+      - run: yum install -y curl
       - add_ssh_keys:
           fingerprints: [ "3d:4a:5e:eb:df:b7:b0:ab:fa:a3:f8:ef:5a:98:47:86" ]
       - attach_workspace:
@@ -231,7 +231,6 @@ jobs:
             ls
             ls ~/
             pwd
-            apk add curl
             cat ~/project/.circleci/ansible/inventory.txt
             export BACKEND_IP=$(curl -H "token: 7df267d9-247d-47c6-b75c-de9bd3f716f8" --request GET \
             https://api.memstash.io/values/ec2_back_ip_${CIRCLE_WORKFLOW_ID})
@@ -274,6 +273,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            npm install
             echo "running migrations"
             npm run migrations > migrations.txt
             cat migrations.txt
