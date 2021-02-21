@@ -220,7 +220,6 @@ jobs:
       - checkout
       - run: yum install -y tar
       - run: yum install -y gzip
-      - run: yum install -y curl
       - add_ssh_keys:
           fingerprints: [ "3d:4a:5e:eb:df:b7:b0:ab:fa:a3:f8:ef:5a:98:47:86" ]
       - attach_workspace:
@@ -240,7 +239,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible && apk add openssh
+            yum add --update ansible && yum add openssh
             ls
       - run:
           name: Set global vars
