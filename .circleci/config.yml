@@ -220,6 +220,7 @@ jobs:
       - checkout
       - run: yum install -y tar
       - run: yum install -y gzip
+      - run: yum install -y apk
       - add_ssh_keys:
           fingerprints: [ "3d:4a:5e:eb:df:b7:b0:ab:fa:a3:f8:ef:5a:98:47:86" ]
       - attach_workspace:
@@ -273,7 +274,6 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm install
             echo "running migrations"
             npm run migrations > migrations.txt
             cat migrations.txt
@@ -385,18 +385,18 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-            requires: [build-frontend]
-      - test-backend:
-            requires: [build-backend]
-      - scan-frontend:
-            requires: [test-frontend]
-      - scan-backend:
-            requires: [test-backend]
+#      - build-frontend
+#      - build-backend
+#      - test-frontend:
+#            requires: [build-frontend]
+#      - test-backend:
+#            requires: [build-backend]
+#      - scan-frontend:
+#            requires: [test-frontend]
+#      - scan-backend:
+#            requires: [test-backend]
       - deploy-infrastructure:
-            requires: [scan-frontend, scan-backend]
+#            requires: [scan-frontend, scan-backend]
             filters:
                 branches:
                   only:
