@@ -394,7 +394,7 @@ workflows:
 #      - scan-backend:
 #            requires: [test-backend]
       - deploy-infrastructure:
-            requires: [scan-frontend, scan-backend]
+#            requires: [scan-frontend, scan-backend]
             filters:
                 branches:
                   only:
