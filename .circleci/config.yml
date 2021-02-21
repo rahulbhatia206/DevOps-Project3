@@ -60,7 +60,6 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm install
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
@@ -78,7 +77,6 @@ jobs:
           name: Build Back-end
           command: |
             cd backend
-            npm install
             npm run build
       - save_cache:
           paths: [backend/node_modules]
@@ -114,8 +112,6 @@ jobs:
           name: Run Back-End Tests
           command: |
             cd backend
-            npm i
-            npm build
             npm run test
       - save_cache:
           paths: [backend/node_modules]
@@ -133,8 +129,7 @@ jobs:
           name: Scan Front-End Dependencies
           command: |
             cd frontend
-            npm i
-            npm audit --audit-level=critical --force
+            npm audit --audit-level=critical
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -151,13 +146,11 @@ jobs:
           name: Scan Back-End Dependencies
           command: |
             cd backend
-            npm i
-            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
       - notify-status-on-slack
-
 
   deploy-infrastructure:
     docker:
