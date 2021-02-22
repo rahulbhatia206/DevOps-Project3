@@ -232,7 +232,7 @@ jobs:
             ls
             ls ~/
             pwd
-            apk add curl
+            qapk add curl
             cat ~/project/.circleci/ansible/inventory.txt
             export BACKEND_IP=$(curl -H "token: 7df267d9-247d-47c6-b75c-de9bd3f716f8" --request GET \
             https://api.memstash.io/values/ec2_back_ip_${CIRCLE_WORKFLOW_ID})
