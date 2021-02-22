@@ -271,8 +271,6 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup
-      - restore_cache:
-            keys: [ backend-build ]
       - run:
           name: Run migrations
           command: |
@@ -287,9 +285,6 @@ jobs:
              https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}
      # Here's where you will add some code to rollback on failure
       - destroy-environment
-      - save_cache:
-          paths: [ backend/node_modules ]
-          key: backend-build
       - notify-status-on-slack
 
 #  deploy-frontend:
