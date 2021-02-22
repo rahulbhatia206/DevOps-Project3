@@ -215,9 +215,11 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: circleci/python:latest
+      - image: alpine:latest
     steps:
       - checkout
+      - run: apk add python3
+      - run: apk add py3-pip
       - aws-cli/setup
       - add_ssh_keys:
           fingerprints: [ "3d:4a:5e:eb:df:b7:b0:ab:fa:a3:f8:ef:5a:98:47:86" ]
