@@ -215,12 +215,10 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: yum install -y tar
-      - run: yum install -y gzip
-      - run: yum install -y apk
+      - aws-cli/setup
       - add_ssh_keys:
           fingerprints: [ "3d:4a:5e:eb:df:b7:b0:ab:fa:a3:f8:ef:5a:98:47:86" ]
       - attach_workspace:
