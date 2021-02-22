@@ -220,6 +220,7 @@ jobs:
       - checkout
       - run: apk add python3
       - run: apk add py3-pip
+      - run: apk add curl
       - aws-cli/setup
       - add_ssh_keys:
           fingerprints: [ "3d:4a:5e:eb:df:b7:b0:ab:fa:a3:f8:ef:5a:98:47:86" ]
