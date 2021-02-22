@@ -503,10 +503,10 @@ workflows:
 ##            requires: [configure-infrastructure]
       - deploy-frontend:
             requires: [configure-infrastructure]
-#      - deploy-backend:
-#            requires: [deploy-frontend]
-#      - smoke-test:
-#            requires: [deploy-backend]
+      - deploy-backend:
+            requires: [deploy-frontend]
+      - smoke-test:
+            requires: [deploy-backend]
 #      - cloudfront-update:
 #            requires: [smoke-test]
 #      - cleanup:
