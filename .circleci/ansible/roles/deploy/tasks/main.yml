@@ -1,10 +1,4 @@
----
-- name: "upgrade packages."
-  become: true
-  apt:
-    upgrade: "yes"
-
-- name: "install dependencies."
+- name: "install Ansible dependencies"
   become: true
   apt:
     name: ["nodejs", "npm", "python3", "tar", "gzip", "git"]
