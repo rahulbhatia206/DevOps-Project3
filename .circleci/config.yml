@@ -385,6 +385,14 @@ jobs:
             apk add --update curl nodejs npm
             pip install awscli
       - run:
+          name: Backend smoke test.
+          command: |
+            export BACKEND_IP=$(curl -H "token: 7df267d9-247d-47c6-b75c-de9bd3f716f8" --request GET \
+            https://api.memstash.io/values/ec2_back_ip_${CIRCLE_WORKFLOW_ID})
+            echo $BACKEND_IP
+            echo "http://$BACKEND_IP:3030/api/status"
+            curl -vvv "http://$BACKEND_IP:3030/api/status"
+      - run:
           name: Frontend smoke test.
           command: |
             URL="http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-eu-west-1.amazonaws.com"
@@ -395,14 +403,7 @@ jobs:
             else
               return 1
             fi
-      - run:
-          name: Backend smoke test.
-          command: |
-            export BACKEND_IP=$(curl -H "token: 7df267d9-247d-47c6-b75c-de9bd3f716f8" --request GET \
-            https://api.memstash.io/values/ec2_back_ip_${CIRCLE_WORKFLOW_ID})
-            echo $BACKEND_IP
-            echo "http://$BACKEND_IP:3030/api/status"
-            curl -vvv "http://$BACKEND_IP:3030/api/status"
+
       - destroy-environment
       - revert-migrations
 
@@ -496,7 +497,7 @@ workflows:
       - scan-backend:
             requires: [test-backend]
       - deploy-infrastructure:
-#            requires: [scan-frontend, scan-backend]
+            requires: [scan-frontend, scan-backend]
             filters:
                 branches:
                   only:
@@ -509,9 +510,9 @@ workflows:
             requires: [configure-infrastructure]
       - deploy-backend:
             requires: [deploy-frontend]
-      - smoke-test:
-            requires: [deploy-backend]
+#      - smoke-test:
+#            requires: [deploy-backend]
       - cloudfront-update:
-            requires: [smoke-test]
+            requires: [deploy-backend]
       - cleanup:
               requires: [cloudfront-update]
