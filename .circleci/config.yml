@@ -403,8 +403,8 @@ jobs:
               return 1
             fi
 
-      - destroy-environment
-      - revert-migrations
+#      - destroy-environment
+#      - revert-migrations
 
   cloudfront-update:
     docker:
@@ -496,7 +496,7 @@ workflows:
 #      - scan-backend:
 #            requires: [test-backend]
       - deploy-infrastructure:
-#            requires: [scan-frontend, scan-backend]
+            requires: [scan-frontend, scan-backend]
             filters:
                 branches:
                   only:
@@ -509,8 +509,8 @@ workflows:
             requires: [run-migrations]
       - deploy-backend:
             requires: [deploy-frontend]
-#      - smoke-test:
-#            requires: [deploy-backend]
+      - smoke-test:
+            requires: [deploy-backend]
       - cloudfront-update:
             requires: [deploy-backend]
       - cleanup:
