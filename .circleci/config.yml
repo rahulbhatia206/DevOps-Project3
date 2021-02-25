@@ -278,7 +278,7 @@ jobs:
             export TYPEORM_PORT=5432
             export TYPEORM_USERNAME=postgres
             export TYPEORM_PASSWORD=udapeople123
-            export TYPEORM_DATABASE=udapeople-db
+            export TYPEORM_DATABASE=postgres
             echo "running migrations"
             npm install
             npm run migrations > migrations.txt
