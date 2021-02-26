@@ -5,14 +5,13 @@ Parameters:
   ID:
     Description: Unique identifier.
     Type: String
-    # Default: id
 
 Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: !Sub UdaPeople-${ID}
-      GroupDescription: Allow port 22, port 3030 and 9100
+      GroupDescription: Allow port 22 and port 3030.
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -23,8 +22,16 @@ Resources:
           ToPort: 3030
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
+          FromPort: 9093
+          ToPort: 9093
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
           FromPort: 9100
           ToPort: 9100
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 9090
+          ToPort: 9090
           CidrIp: 0.0.0.0/0
 
   EC2Instance:
@@ -40,3 +47,10 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub backend-${ID}
+
+Outputs:
+  backendIP:
+    Description: The IP of the EC2Instance
+    Value: !GetAtt EC2Instance.PublicIp
+    Export:
+      Name: "backendIP"
