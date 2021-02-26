@@ -55,7 +55,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build-v3]
+          keys: [frontend-build-v4]
       - run:
           name: Build front-end
           command: |
@@ -64,7 +64,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-build-v3
+          key: frontend-build-v4
       - notify-status-on-slack
 
   build-backend:
@@ -73,7 +73,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-v3]
+          keys: [backend-build-v4]
       - run:
           name: Build Back-end
           command: |
@@ -82,7 +82,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build-v3
+          key: backend-build-v4
       - notify-status-on-slack
 
   test-frontend:
@@ -91,7 +91,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-test-v3]
+          keys: [frontend-test-v4]
       - run:
           name: Run Front-End Tests
           command: |
@@ -100,7 +100,7 @@ jobs:
             npm run test
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-test-v3
+          key: frontend-test-v4
       - notify-status-on-slack
 
   test-backend:
@@ -109,7 +109,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-v3]
+          keys: [backend-build-v4]
       - run:
           name: Run Back-End Tests
           command: |
@@ -118,7 +118,7 @@ jobs:
             npm run test
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build-v3
+          key: backend-build-v4
       - notify-status-on-slack
 
   scan-frontend:
@@ -127,7 +127,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build-v3]
+          keys: [frontend-build-v4]
       - run:
           name: Scan Front-End Dependencies
           command: |
@@ -136,7 +136,7 @@ jobs:
             npm audit --audit-level=critical
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-build-v3
+          key: frontend-build-v4
       - notify-status-on-slack
 
   scan-backend:
@@ -145,7 +145,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-v3]
+          keys: [backend-build-v4]
       - run:
           name: Scan Back-End Dependencies
           command: |
@@ -154,7 +154,7 @@ jobs:
             npm audit --audit-level=critical
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build-v3
+          key: backend-build-v4
       - notify-status-on-slack
 
   deploy-infrastructure:
