@@ -19,7 +19,7 @@
       changed_when: false
 
     - setup:
-  roles:
-    - configure-server
-    - configure-prometheus-node-exporter
     
+  roles:
+    - configure-prometheus-node-exporter
+    - configure-server
