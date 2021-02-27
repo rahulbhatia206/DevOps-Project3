@@ -77,18 +77,16 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-v6]
+          keys: [backend-build-v7]
       - run:
           name: Back-end build
           command: |
             cd backend
-            npm install 
-            # sudo npm i --save-dev standard-version
-            # sudo npm i semver
+            npm install
             npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build-v6
+          key: backend-build-v7
 
   test-frontend:
     docker:
@@ -113,7 +111,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-v6]
+          keys: [backend-build-v7]
       - run:
           name: Back-end Test
           command: |
@@ -146,7 +144,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build-v6]
+          keys: [backend-build-v7]
       - run:
           name: back-end Scan
           command: |
