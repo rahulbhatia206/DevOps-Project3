@@ -88,7 +88,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-build
+          key: backend-build-v6
 
   test-frontend:
     docker:
@@ -113,7 +113,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [backend-build-v6]
       - run:
           name: Back-end Test
           command: |
@@ -146,7 +146,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-build]
+          keys: [backend-build-v6]
       - run:
           name: back-end Scan
           command: |
